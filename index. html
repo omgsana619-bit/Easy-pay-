@@ -1,0 +1,448 @@
+here
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy Pay</title>
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+body{
+  background:#f7f5fc;
+  color:#222;
+  padding-bottom:80px;
+}
+header{
+  background:white;
+  padding:15px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 2px 10px #00000010;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.logo-box{
+  width:45px;
+  height:45px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#6325d5,#a15ee8);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
+.logo h2{
+  color:#321078;
+}
+.logo small{
+  color:#777;
+}
+.notify{
+  background:#eee7ff;
+  border:0;
+  padding:12px;
+  border-radius:12px;
+}
+.container{
+  max-width:800px;
+  margin:auto;
+}
+.hero{
+  margin:18px;
+  padding:25px;
+  border-radius:25px;
+  color:white;
+  background:linear-gradient(135deg,#6023d0,#9b5de5);
+}
+.hero p{
+  opacity:.8;
+}
+.hero h1{
+  margin:5px 0 12px;
+}
+.badge{
+  display:inline-block;
+  background:#ffffff25;
+  color:#ffe05a;
+  padding:7px 12px;
+  border-radius:20px;
+}
+.balance-title{
+  margin-top:20px;
+  opacity:.8;
+}
+.balance{
+  font-size:32px;
+  font-weight:bold;
+  margin:4px 0 15px;
+}
+.btn{
+  border:0;
+  padding:11px 18px;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.white{
+  background:white;
+  color:#6425d3;
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin:0 16px;
+}
+.stat{
+  background:white;
+  border-radius:15px;
+  padding:13px 5px;
+  text-align:center;
+}
+.stat b{
+  display:block;
+  color:#16a852;
+}
+.stat small{
+  color:#777;
+  font-size:10px;
+}
+.banner{
+  margin:18px;
+  padding:23px;
+  border-radius:22px;
+  background:#281060;
+  color:white;
+}
+.banner h2{
+  color:#ffd83d;
+  margin:5px 0;
+}
+.banner p{
+  color:#ddd;
+  margin:8px 0 15px;
+  line-height:1.5;
+}
+.title{
+  margin:22px 18px 12px;
+}
+.quick{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:0 18px;
+}
+.quick button{
+  min-width:110px;
+  border:0;
+  background:white;
+  padding:15px 8px;
+  border-radius:16px;
+  font-size:25px;
+}
+.quick span{
+  display:block;
+  font-size:11px;
+  margin-top:7px;
+}
+.videos{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  padding:0 18px;
+}
+.video{
+  min-width:220px;
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+}
+.thumbnail{
+  height:110px;
+  background:linear-gradient(135deg,#29105f,#7540d5);
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:40px;
+  position:relative;
+}
+.reward{
+  position:absolute;
+  left:8px;
+  top:8px;
+  background:#702bdd;
+  padding:5px 8px;
+  border-radius:8px;
+  font-size:11px;
+}
+.video-info{
+  padding:12px;
+}
+.video-info b{
+  display:block;
+}
+.video-info small{
+  color:#888;
+}
+.task{
+  margin:20px 18px;
+  padding:18px;
+  border-radius:20px;
+  background:#eee5ff;
+}
+.task button{
+  background:#6b28d5;
+  color:white;
+  margin-top:12px;
+}
+nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:70px;
+  background:white;
+  border-top:1px solid #ddd;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+}
+nav button{
+  background:none;
+  border:0;
+  color:#777;
+  font-size:20px;
+}
+nav button.active{
+  color:#6827d5;
+}
+nav small{
+  display:block;
+  font-size:10px;
+}
+@media(max-width:500px){
+  .stats b{
+    font-size:11px;
+  }
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<div class="logo-box">
+EP
+</div>
+<div>
+<h2>Easy Pay</h2>
+<small>Watch • Earn • Withdraw</small>
+</div>
+</div>
+<button class="notify" onclick="notification()">
+🔔
+</button>
+</header>
+<main class="container">
+<section class="hero">
+<p>Welcome Back,</p>
+<h1>Piyash 👑</h1>
+<span class="badge">
+⭐ Premium Member
+</span>
+<div class="balance-title">
+Total Balance
+</div>
+<div class="balance">
+৳ <span id="balance">1,250.50</span>
+</div>
+<button class="btn white" onclick="wallet()">
+Wallet →
+</button>
+</section>
+<section class="stats">
+<div class="stat">
+<b>৳5,430</b>
+<small>Total Earnings</small>
+</div>
+<div class="stat">
+<b>৳120.50</b>
+<small>Today</small>
+</div>
+<div class="stat">
+<b>12</b>
+<small>Videos</small>
+</div>
+<div class="stat">
+<b>✓</b>
+<small>Bonus</small>
+</div>
+</section>
+<section class="banner">
+<span>WATCH VIDEOS</span>
+<h2>Earn Money</h2>
+<p>
+Watch eligible sponsored videos and complete tasks to receive rewards.
+</p>
+<button class="btn white" onclick="watchVideo()">
+Watch Now ▶
+</button>
+</section>
+<h2 class="title">
+Quick Actions
+</h2>
+<div class="quick">
+<button onclick="watchVideo()">
+🎬
+<span>Watch & Earn</span>
+</button>
+<button onclick="subscription()">
+⭐
+<span>Subscription</span>
+</button>
+<button onclick="wallet()">
+💳
+<span>Wallet</span>
+</button>
+<button onclick="referral()">
+👥
+<span>Referral</span>
+</button>
+</div>
+<h2 class="title">
+Featured Videos
+</h2>
+<div class="videos">
+<div class="video">
+<div class="thumbnail">
+▶
+<span class="reward">
+৳5.00
+</span>
+</div>
+<div class="video-info">
+<b>Top Earning Apps</b>
+<small>Watch & Earn</small>
+</div>
+</div>
+<div class="video">
+<div class="thumbnail">
+▶
+<span class="reward">
+৳6.00
+</span>
+</div>
+<div class="video-info">
+<b>How to Earn Online</b>
+<small>Watch & Earn</small>
+</div>
+</div>
+<div class="video">
+<div class="thumbnail">
+▶
+<span class="reward">
+৳4.00
+</span>
+</div>
+<div class="video-info">
+<b>Make Money From Home</b>
+<small>Watch & Earn</small>
+</div>
+</div>
+</div>
+<section class="task">
+<h2>🎁 Daily Tasks</h2>
+<p>
+Complete eligible tasks and earn extra rewards.
+</p>
+<button class="btn" onclick="dailyTask()">
+Complete Task
+</button>
+</section>
+</main>
+<nav>
+<button class="active">
+⌂
+<small>Home</small>
+</button>
+<button onclick="watchVideo()">
+▶
+<small>Watch</small>
+</button>
+<button onclick="wallet()">
+৳
+<small>Wallet</small>
+</button>
+<button onclick="referral()">
+♧
+<small>Referral</small>
+</button>
+<button onclick="profile()">
+●
+<small>Profile</small>
+</button>
+</nav>
+<script>
+function notification(){
+alert(
+"🔔 Notifications\\n\\n" +
+"• Daily bonus available\\n" +
+"• 3 new videos available\\n" +
+"• Welcome to Easy Pay"
+);
+}
+function watchVideo(){
+alert(
+"🎬 Watch & Earn\\n\\n" +
+"Demo video started.\\n\\n" +
+"Production version-এ video completion server দ্বারা verify করা হবে।"
+);
+}
+function wallet(){
+alert(
+"💳 Wallet\\n\\n" +
+"Available Balance: ৳1,250.50\\n" +
+"Total Earnings: ৳5,430"
+);
+}
+function subscription(){
+alert(
+"⭐ Subscription Plans\\n\\n" +
+"Starter — ৳99/month\\n" +
+"Premium — ৳299/month\\n\\n" +
+"Payment gateway পরে যুক্ত করা যাবে।"
+);
+}
+function referral(){
+alert(
+"👥 Referral\\n\\n" +
+"Your Referral Code: EASYPAY01\\n\\n" +
+"বন্ধুদের invite করে eligible referral reward পাওয়া যাবে।"
+);
+}
+function profile(){
+alert(
+"👤 Profile\\n\\n" +
+"Name: Piyash\\n" +
+"Plan: Premium"
+);
+}
+function dailyTask(){
+alert(
+"🎁 Daily Task\\n\\n" +
+"Demo task opened."
+);
+}
+</script>
+</body>
+</html>
